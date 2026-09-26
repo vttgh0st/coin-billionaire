@@ -259,6 +259,11 @@ margin-top:20px;
 }
 
 .upgrade{
+appearance:none;
+width:100%;
+text-align:left;
+color:var(--text);
+font:inherit;
 border:1px solid var(--border);
 background:#0b0b0e;
 border-radius:13px;
@@ -866,12 +871,15 @@ for(const id in upgradeData){
 const data=upgradeData[id];
 const level=game.upgrades[id];
 const cost=upgradeCost(data,level);
+const canBuy=game.coins>=cost;
 
-const div=document.createElement("div");
+const button=document.createElement("button");
 
-div.className="upgrade"+(game.coins<cost?" disabled":"");
+button.type="button";
+button.className="upgrade"+(canBuy?"":" disabled");
+button.dataset.upgrade=id;
 
-div.innerHTML=`
+button.innerHTML=`
 <div class="upgradeTop">
 <div class="upgradeName">${data.name}</div>
 <div class="level">LV ${level}</div>
@@ -880,14 +888,21 @@ div.innerHTML=`
 <div class="upgradeDesc">${data.desc}</div>
 
 <div class="buy">
-<span>Comprar melhoria</span>
+<span>${canBuy?"COMPRAR":"PRECISA DE MAIS MOEDAS"}</span>
 <span class="cost">🪙 ${format(cost)}</span>
 </div>
 `;
 
-div.onclick=()=>buyUpgrade(id);
+button.addEventListener("click",function(e){
 
-$("upgrades").appendChild(div);
+e.preventDefault();
+e.stopPropagation();
+
+buyUpgrade(id);
+
+});
+
+$("upgrades").appendChild(button);
 
 }
 
