@@ -2,1221 +2,1228 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>GHOST EMPIRE</title>
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 
 :root{
---bg:#050505;
---panel:#0c0c0f;
---panel2:#111116;
---border:#22222a;
---text:#f5f5f5;
---muted:#85858f;
---primary:#8b5cf6;
---primary2:#a78bfa;
---green:#22c55e;
---gold:#f5c451;
---danger:#ef4444;
+ --bg:#030305;
+ --panel:#09090d;
+ --panel2:#0e0e14;
+ --line:#24242e;
+ --text:#f5f5f7;
+ --muted:#888895;
+ --purple:#9b5cff;
+ --purple2:#6d28d9;
+ --green:#39ff9a;
+ --red:#ff4d67;
+ --gold:#ffd166;
 }
 
 body{
-font-family:Inter,Arial,sans-serif;
-background:
-radial-gradient(circle at 50% -10%,#241344 0,transparent 38%),
-var(--bg);
-color:var(--text);
-min-height:100vh;
+ background:
+ radial-gradient(circle at 50% -20%,#241044 0,transparent 40%),
+ #030305;
+ color:var(--text);
+ font-family:Arial,sans-serif;
+ min-height:100vh;
 }
 
-button{font:inherit}
+button{
+ font:inherit;
+ cursor:pointer;
+}
 
-.header{
-height:76px;
-border-bottom:1px solid var(--border);
-background:rgba(5,5,5,.9);
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:0 28px;
-position:sticky;
-top:0;
-z-index:10;
-backdrop-filter:blur(12px);
+header{
+ height:70px;
+ border-bottom:1px solid var(--line);
+ background:#050507;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ padding:0 25px;
+ position:sticky;
+ top:0;
+ z-index:10;
 }
 
 .logo{
-font-weight:900;
-letter-spacing:3px;
-font-size:20px;
+ font-size:23px;
+ font-weight:900;
+ letter-spacing:3px;
 }
 
-.logo span{color:var(--primary2)}
+.logo span{color:var(--purple)}
 
 .headerStats{
-display:flex;
-gap:25px;
+ display:flex;
+ gap:25px;
+ color:var(--muted);
+ font-size:13px;
 }
 
-.headerStat{
-display:flex;
-flex-direction:column;
-align-items:flex-end;
-}
+.headerStats b{color:white}
 
-.headerStat small{
-font-size:10px;
-color:var(--muted);
-text-transform:uppercase;
-}
-
-.headerStat strong{
-font-size:17px;
-}
-
-.layout{
-max-width:1400px;
-margin:auto;
-padding:25px;
-display:grid;
-grid-template-columns:270px 1fr 300px;
-gap:20px;
+.app{
+ max-width:1450px;
+ margin:auto;
+ padding:20px;
+ display:grid;
+ grid-template-columns:270px 1fr 300px;
+ gap:18px;
 }
 
 .panel{
-background:linear-gradient(145deg,#0e0e12,#09090b);
-border:1px solid var(--border);
-border-radius:18px;
-padding:18px;
-box-shadow:0 20px 60px rgba(0,0,0,.35);
-}
-
-.panelTitle{
-font-size:12px;
-color:var(--muted);
-text-transform:uppercase;
-letter-spacing:2px;
-margin-bottom:15px;
+ background:linear-gradient(180deg,#0b0b10,#07070a);
+ border:1px solid var(--line);
+ border-radius:16px;
+ padding:18px;
 }
 
 .profile{
-display:flex;
-align-items:center;
-gap:12px;
-padding-bottom:18px;
-border-bottom:1px solid var(--border);
+ text-align:center;
 }
 
 .avatar{
-width:50px;
-height:50px;
-border-radius:14px;
-display:grid;
-place-items:center;
-font-size:25px;
-background:linear-gradient(145deg,#17121f,#09070d);
-border:1px solid #39245c;
-box-shadow:0 0 25px rgba(139,92,246,.18);
-}
-
-.profile strong{display:block}
-.profile small{color:var(--muted)}
-
-.xp{
-margin-top:15px;
-}
-
-.xpTop{
-display:flex;
-justify-content:space-between;
-font-size:11px;
-color:var(--muted);
-margin-bottom:7px;
-}
-
-.bar{
-height:7px;
-background:#18181c;
-border-radius:20px;
-overflow:hidden;
-}
-
-.bar i{
-display:block;
-height:100%;
-width:0%;
-background:linear-gradient(90deg,var(--primary),var(--primary2));
-border-radius:20px;
-transition:.3s;
-}
-
-.center{
-min-width:0;
-}
-
-.hero{
-text-align:center;
-padding:25px 10px 10px;
-}
-
-.hero h1{
-font-size:clamp(28px,4vw,52px);
-letter-spacing:-2px;
-}
-
-.hero p{
-color:var(--muted);
-margin-top:8px;
-}
-
-.currency{
-margin:25px auto 15px;
-font-size:clamp(32px,5vw,58px);
-font-weight:900;
-letter-spacing:-2px;
-}
-
-.currency small{
-font-size:14px;
-color:var(--muted);
-letter-spacing:1px;
-}
-
-.coinButton{
-width:min(290px,70vw);
-height:min(290px,70vw);
-max-width:290px;
-max-height:290px;
-border-radius:50%;
-border:1px solid #6841a5;
-background:
-radial-gradient(circle at 35% 25%,#c4b5fd,#8b5cf6 35%,#3b176e 75%,#170a2b);
-color:white;
-cursor:pointer;
-box-shadow:
-0 0 0 12px rgba(139,92,246,.05),
-0 0 70px rgba(139,92,246,.35),
-inset 0 -25px 40px rgba(0,0,0,.35);
-transition:.12s;
-user-select:none;
-}
-
-.coinButton:hover{
-transform:scale(1.025);
-box-shadow:
-0 0 0 15px rgba(139,92,246,.06),
-0 0 90px rgba(139,92,246,.5),
-inset 0 -25px 40px rgba(0,0,0,.35);
-}
-
-.coinButton:active{
-transform:scale(.95);
-}
-
-.ghost{
-font-size:85px;
-display:block;
-filter:drop-shadow(0 8px 15px rgba(0,0,0,.5));
-}
-
-.coinText{
-display:block;
-font-size:13px;
-font-weight:900;
-letter-spacing:3px;
-margin-top:5px;
-}
-
-.stats{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:10px;
-margin-top:25px;
-}
-
-.stat{
-padding:14px;
-border:1px solid var(--border);
-background:#0b0b0e;
-border-radius:12px;
-text-align:center;
-}
-
-.stat small{
-display:block;
-color:var(--muted);
-font-size:10px;
-text-transform:uppercase;
-margin-bottom:5px;
-}
-
-.stat strong{font-size:18px}
-
-.section{
-margin-top:20px;
-}
-
-.upgrade{
-appearance:none;
-width:100%;
-text-align:left;
-color:var(--text);
-font:inherit;
-border:1px solid var(--border);
-background:#0b0b0e;
-border-radius:13px;
-padding:13px;
-margin-bottom:9px;
-cursor:pointer;
-transition:.18s;
-}
-
-.upgrade:hover{
-border-color:#55358b;
-transform:translateY(-1px);
-}
-
-.upgrade.disabled{
-opacity:.45;
-}
-
-.upgradeTop{
-display:flex;
-justify-content:space-between;
-gap:10px;
-}
-
-.upgradeName{
-font-size:13px;
-font-weight:800;
+ width:80px;
+ height:80px;
+ margin:auto auto 12px;
+ border-radius:50%;
+ display:grid;
+ place-items:center;
+ font-size:38px;
+ background:#120c20;
+ border:1px solid #4b267c;
+ box-shadow:0 0 30px #6d28d933;
 }
 
 .level{
-font-size:10px;
-color:var(--primary2);
+ font-weight:bold;
 }
 
-.upgradeDesc{
-font-size:10px;
-color:var(--muted);
-margin:5px 0 10px;
+.xp{
+ height:7px;
+ background:#1b1b23;
+ border-radius:10px;
+ overflow:hidden;
+ margin:9px 0 5px;
 }
 
-.buy{
-display:flex;
-justify-content:space-between;
-font-size:11px;
+.xp i{
+ display:block;
+ height:100%;
+ background:linear-gradient(90deg,var(--purple2),var(--purple));
 }
 
-.cost{color:var(--gold)}
-
-.mission{
-border:1px solid var(--border);
-padding:12px;
-border-radius:12px;
-margin-bottom:9px;
-background:#0a0a0d;
+.rank{
+ color:var(--purple);
+ font-size:12px;
 }
 
-.missionName{
-font-weight:800;
-font-size:12px;
+.nav{
+ display:grid;
+ gap:7px;
+ margin-top:20px;
 }
 
-.missionDesc{
-font-size:10px;
-color:var(--muted);
-margin:4px 0 8px;
+.nav button{
+ border:1px solid var(--line);
+ background:#0b0b10;
+ color:#aaa;
+ padding:11px;
+ border-radius:9px;
+ text-align:left;
 }
 
-.reward{
-color:var(--gold);
-font-size:10px;
+.nav button.active,
+.nav button:hover{
+ background:#171020;
+ border-color:#6330a0;
+ color:white;
 }
 
-.achievement{
-display:flex;
-align-items:center;
-gap:10px;
-padding:10px 0;
-border-bottom:1px solid #18181c;
+.center{
+ min-width:0;
 }
 
-.achievement:last-child{border:0}
-
-.achievementIcon{
-width:36px;
-height:36px;
-border-radius:10px;
-display:grid;
-place-items:center;
-background:#15151a;
+.hero{
+ text-align:center;
+ padding:25px 10px;
 }
 
-.achievement.locked{
-opacity:.35;
+.hero h1{
+ font-size:30px;
+ letter-spacing:3px;
 }
 
-.actions{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:8px;
-margin-top:15px;
+.hero p{
+ color:var(--muted);
+ margin-top:6px;
 }
 
-.action{
-border:1px solid var(--border);
-background:#111116;
-color:white;
-border-radius:10px;
-padding:10px;
-cursor:pointer;
-font-size:11px;
-}
-
-.action:hover{border-color:#60429a}
-
-.float{
-position:fixed;
-pointer-events:none;
-font-weight:900;
-font-size:20px;
-color:#c4b5fd;
-animation:float 800ms ease-out forwards;
-z-index:100;
-}
-
-@keyframes float{
-0%{opacity:1;transform:translateY(0) scale(1)}
-100%{opacity:0;transform:translateY(-90px) scale(1.2)}
-}
-
-.toast{
-position:fixed;
-bottom:25px;
-left:50%;
-transform:translateX(-50%) translateY(30px);
-background:#111116;
-border:1px solid #3a2855;
-padding:12px 18px;
-border-radius:12px;
-opacity:0;
-pointer-events:none;
-transition:.3s;
-z-index:200;
-font-size:12px;
-box-shadow:0 15px 40px #000;
-}
-
-.toast.show{
-opacity:1;
-transform:translateX(-50%) translateY(0);
+.coins{
+ margin:25px 0 8px;
+ font-size:43px;
+ font-weight:900;
+ color:var(--gold);
+ text-shadow:0 0 25px #ffd16633;
 }
 
 .combo{
-text-align:center;
-height:24px;
-font-size:12px;
-font-weight:800;
-color:var(--gold);
+ color:var(--green);
+ font-size:14px;
+}
+
+.coin{
+ width:190px;
+ height:190px;
+ border-radius:50%;
+ margin:28px auto;
+ display:grid;
+ place-items:center;
+ border:4px solid #7b43c4;
+ background:
+ radial-gradient(circle at 35% 30%,#391966,#0c0712 65%);
+ box-shadow:
+ 0 0 35px #8b5cf655,
+ inset 0 0 30px #000;
+ color:white;
+ font-size:70px;
+ transition:.08s;
+ user-select:none;
+}
+
+.coin:hover{
+ transform:scale(1.025);
+ box-shadow:0 0 55px #9b5cff77,inset 0 0 30px #000;
+}
+
+.coin:active{
+ transform:scale(.95);
+}
+
+.stats{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:8px;
+}
+
+.stat{
+ background:#08080c;
+ border:1px solid var(--line);
+ border-radius:10px;
+ padding:12px;
+ text-align:center;
+}
+
+.stat small{
+ display:block;
+ color:var(--muted);
+ margin-bottom:4px;
+}
+
+.stat b{font-size:17px}
+
+.page{
+ display:none;
+}
+
+.page.active{
+ display:block;
+}
+
+.grid{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:10px;
+}
+
+.card{
+ background:#0b0b10;
+ border:1px solid var(--line);
+ border-radius:12px;
+ padding:15px;
+}
+
+.card h3{
+ margin-bottom:6px;
+}
+
+.card p{
+ color:var(--muted);
+ font-size:13px;
+}
+
+.upgrade{
+ width:100%;
+ border:1px solid var(--line);
+ background:#0b0b10;
+ color:white;
+ border-radius:12px;
+ padding:14px;
+ text-align:left;
+ margin-bottom:9px;
+ transition:.15s;
+}
+
+.upgrade:hover:not(.disabled){
+ border-color:#7040a8;
+ background:#130d1d;
+ transform:translateY(-1px);
+}
+
+.upgrade.disabled{
+ opacity:.48;
+ cursor:not-allowed;
+}
+
+.upgradeTop{
+ display:flex;
+ justify-content:space-between;
+}
+
+.upgradeName{
+ font-weight:bold;
+}
+
+.level{
+ color:var(--purple);
+ font-size:12px;
+}
+
+.upgradeDesc{
+ color:var(--muted);
+ font-size:12px;
+ margin:7px 0;
+}
+
+.buy{
+ display:flex;
+ justify-content:space-between;
+ font-size:12px;
+}
+
+.cost{
+ color:var(--gold);
+}
+
+.action{
+ width:100%;
+ padding:13px;
+ border:1px solid #6133a0;
+ background:#170d27;
+ color:white;
+ border-radius:10px;
+ margin-top:10px;
+ font-weight:bold;
+}
+
+.action:hover{
+ background:#25123e;
+}
+
+.danger{
+ border-color:#792638;
+ background:#220b11;
+}
+
+.prestigeBox{
+ text-align:center;
+ padding:25px;
+ border:1px solid #6133a0;
+ border-radius:15px;
+ background:radial-gradient(circle,#1a0d2a,#09090d);
+}
+
+.prestigeValue{
+ font-size:38px;
+ color:#c08cff;
+ font-weight:bold;
+ margin:15px;
+}
+
+.mission{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:10px;
+}
+
+.done{
+ border-color:#235b43;
+ background:#08150f;
+}
+
+.check{
+ color:var(--green);
+ font-weight:bold;
+}
+
+.achievement{
+ display:flex;
+ gap:12px;
+ align-items:center;
+}
+
+.achIcon{
+ font-size:28px;
+}
+
+.locked{
+ opacity:.4;
+}
+
+.toast{
+ position:fixed;
+ right:20px;
+ bottom:20px;
+ padding:13px 17px;
+ border:1px solid #6133a0;
+ background:#10091a;
+ border-radius:10px;
+ box-shadow:0 0 25px #000;
+ z-index:99;
+ animation:toast .2s ease;
+}
+
+@keyframes toast{
+ from{transform:translateY(15px);opacity:0}
+ to{transform:none;opacity:1}
+}
+
+.float{
+ position:fixed;
+ color:var(--gold);
+ font-weight:bold;
+ pointer-events:none;
+ animation:float 1s forwards;
+ z-index:50;
+}
+
+@keyframes float{
+ from{opacity:1;transform:translateY(0)}
+ to{opacity:0;transform:translateY(-70px)}
+}
+
+.rightTitle{
+ color:var(--muted);
+ font-size:12px;
+ letter-spacing:1px;
+ margin-bottom:10px;
+}
+
+.mini{
+ display:grid;
+ gap:8px;
+}
+
+.miniCard{
+ border:1px solid var(--line);
+ background:#08080c;
+ border-radius:10px;
+ padding:11px;
+}
+
+.miniCard b{
+ display:block;
+ margin-bottom:3px;
+}
+
+.miniCard span{
+ color:var(--muted);
+ font-size:12px;
 }
 
 @media(max-width:1050px){
-.layout{
-grid-template-columns:230px 1fr;
-}
-.right{
-grid-column:1/-1;
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:20px;
-}
+ .app{grid-template-columns:220px 1fr}
+ .right{display:none}
 }
 
 @media(max-width:700px){
-.header{padding:0 15px}
-.headerStats{gap:10px}
-.headerStat:nth-child(2){display:none}
-
-.layout{
-display:block;
-padding:12px;
-}
-
-.left,.right{margin-top:15px}
-
-.right{
-display:block;
-}
-
-.coinButton{
-width:240px;
-height:240px;
-}
-
-.ghost{font-size:70px}
-
-.stats{grid-template-columns:1fr 1fr 1fr}
-
-.header{
-height:65px;
-}
+ .app{grid-template-columns:1fr;padding:10px}
+ .left{order:2}
+ .center{order:1}
+ .headerStats{display:none}
+ .grid{grid-template-columns:1fr}
+ .stats{grid-template-columns:1fr}
 }
 </style>
 </head>
 
 <body>
 
-<header class="header">
-<div class="logo">GHOST<span>EMPIRE</span></div>
+<header>
+ <div class="logo">GHOST<span>EMPIRE</span></div>
 
-<div class="headerStats">
-<div class="headerStat">
-<small>Moedas</small>
-<strong id="topCoins">0</strong>
-</div>
-
-<div class="headerStat">
-<small>Produção</small>
-<strong id="topPps">0/s</strong>
-</div>
-
-<div class="headerStat">
-<small>Nível</small>
-<strong id="topLevel">1</strong>
-</div>
-</div>
+ <div class="headerStats">
+  <span>LEVEL <b id="headerLevel">1</b></span>
+  <span>ESSÊNCIA <b id="headerEssence">0</b></span>
+  <span>PRESTÍGIOS <b id="headerPrestige">0</b></span>
+ </div>
 </header>
 
-<main class="layout">
+<div class="app">
 
-<!-- ESQUERDA -->
-<aside class="left">
+<aside class="panel left">
 
-<div class="panel">
+ <div class="profile">
+  <div class="avatar">👻</div>
+  <div>IMPERADOR FANTASMA</div>
+  <div class="rank" id="rank">RECRUTA</div>
 
-<div class="profile">
-<div class="avatar">👻</div>
-<div>
-<strong>Ghost</strong>
-<small id="rank">Novato</small>
-</div>
-</div>
+  <div class="xp">
+   <i id="xpBar" style="width:0%"></i>
+  </div>
 
-<div class="xp">
-<div class="xpTop">
-<span>XP</span>
-<span id="xpText">0 / 100</span>
-</div>
-<div class="bar"><i id="xpBar"></i></div>
-</div>
+  <small id="xpText">0 / 100 XP</small>
+ </div>
 
-</div>
-
-<div class="panel section">
-
-<div class="panelTitle">Upgrades</div>
-
-<div id="upgrades"></div>
-
-</div>
+ <div class="nav">
+  <button class="active" data-page="empire">👑 Império</button>
+  <button data-page="upgrades">⚡ Upgrades</button>
+  <button data-page="shop">🏪 Loja</button>
+  <button data-page="missions">🎯 Missões</button>
+  <button data-page="achievements">🏆 Conquistas</button>
+  <button data-page="prestige">♻️ Prestígio</button>
+ </div>
 
 </aside>
 
-<!-- CENTRO -->
-<section class="center">
+<main class="center">
 
-<div class="panel hero">
+<section class="page active" id="page-empire">
 
-<h1>CONSTRUA SEU IMPÉRIO</h1>
-<p>Comece pequeno. Evolua. Domine.</p>
+ <div class="panel hero">
+  <h1>CONSTRUA SEU IMPÉRIO</h1>
+  <p>Domine o mundo através do poder fantasma.</p>
 
-<div class="currency">
-<span id="coins">0</span>
-<small> GHOST COINS</small>
-</div>
+  <div class="coins" id="coins">0</div>
+  <div class="combo">COMBO x<span id="combo">1.00</span></div>
 
-<div class="combo" id="combo"></div>
+  <button class="coin" id="coin">👻</button>
 
-<button class="coinButton" id="coin">
-<span class="ghost">👻</span>
-<span class="coinText">CLIQUE PARA PRODUZIR</span>
-</button>
+  <div class="stats">
+   <div class="stat">
+    <small>POR CLIQUE</small>
+    <b id="clickPower">1</b>
+   </div>
 
-<div class="stats">
+   <div class="stat">
+    <small>POR SEGUNDO</small>
+    <b id="pps">0</b>
+   </div>
 
-<div class="stat">
-<small>Por clique</small>
-<strong id="clickPower">+1</strong>
-</div>
+   <div class="stat">
+    <small>TOTAL</small>
+    <b id="total">0</b>
+   </div>
+  </div>
+ </div>
 
-<div class="stat">
-<small>Automático</small>
-<strong id="pps">0/s</strong>
-</div>
+ <div class="panel">
+  <h3>⚡ PROGRESSO</h3>
+  <br>
 
-<div class="stat">
-<small>Total produzido</small>
-<strong id="total">0</strong>
-</div>
+  <div class="grid">
+   <div class="card">
+    <h3 id="clickCount">0</h3>
+    <p>Cliques realizados</p>
+   </div>
 
-</div>
+   <div class="card">
+    <h3 id="autoClicks">0</h3>
+    <p>Auto-cliques</p>
+   </div>
 
-</div>
+   <div class="card">
+    <h3 id="session">0</h3>
+    <p>Moedas nesta sessão</p>
+   </div>
 
-<div class="panel section">
-
-<div class="panelTitle">Progresso</div>
-
-<div class="stats">
-
-<div class="stat">
-<small>Cliques</small>
-<strong id="clicks">0</strong>
-</div>
-
-<div class="stat">
-<small>Nível</small>
-<strong id="level">1</strong>
-</div>
-
-<div class="stat">
-<small>Combo</small>
-<strong id="comboValue">x1</strong>
-</div>
-
-</div>
-
-<div class="actions">
-<button class="action" id="save">💾 Salvar</button>
-<button class="action" id="reset">🗑️ Resetar</button>
-</div>
-
-</div>
+   <div class="card">
+    <h3 id="prestigeCount">0</h3>
+    <p>Prestígios realizados</p>
+   </div>
+  </div>
+ </div>
 
 </section>
 
-<!-- DIREITA -->
-<aside class="right">
+<section class="page" id="page-upgrades">
 
-<div class="panel">
+ <div class="panel">
+  <h2>⚡ ÁRVORE DE UPGRADES</h2>
+  <p style="color:#888;margin:7px 0 15px">
+   Evolua seu império e aumente sua produção.
+  </p>
 
-<div class="panelTitle">Missões</div>
+  <div id="upgrades"></div>
+ </div>
 
-<div id="missions"></div>
+</section>
 
+<section class="page" id="page-shop">
+
+ <div class="panel">
+  <h2>🏪 LOJA FANTASMA</h2>
+  <p style="color:#888;margin:7px 0 15px">
+   Use sua essência para comprar bônus permanentes.
+  </p>
+
+  <div id="shop"></div>
+ </div>
+
+</section>
+
+<section class="page" id="page-missions">
+
+ <div class="panel">
+  <h2>🎯 MISSÕES</h2>
+  <p style="color:#888;margin:7px 0 15px">
+   Complete objetivos para receber recompensas.
+  </p>
+
+  <div id="missions"></div>
+ </div>
+
+</section>
+
+<section class="page" id="page-achievements">
+
+ <div class="panel">
+  <h2>🏆 CONQUISTAS</h2>
+  <p style="color:#888;margin:7px 0 15px">
+   Descubra todos os feitos do império.
+  </p>
+
+  <div id="achievements"></div>
+ </div>
+
+</section>
+
+<section class="page" id="page-prestige">
+
+ <div class="panel prestigeBox">
+  <h2>♻️ PRESTÍGIO</h2>
+
+  <p style="color:#999;margin-top:10px">
+   Reinicie seu império em troca de Essência Fantasma.
+  </p>
+
+  <div class="prestigeValue" id="prestigeGain">0</div>
+
+  <p>ESSÊNCIA FANTASMA</p>
+
+  <button class="action" id="prestigeButton">
+   ♻️ REALIZAR PRESTÍGIO
+  </button>
+
+  <br><br>
+
+  <div class="card">
+   <b>Bônus permanente</b>
+   <p>+10% de produção por Essência Fantasma.</p>
+  </div>
+ </div>
+
+</section>
+
+<div class="panel" style="margin-top:18px">
+ <button class="action" id="save">💾 SALVAR AGORA</button>
+ <button class="action danger" id="reset">🗑️ RESETAR JOGO</button>
 </div>
-
-<div class="panel section">
-
-<div class="panelTitle">Conquistas</div>
-
-<div id="achievements"></div>
-
-</div>
-
-</aside>
 
 </main>
 
-<div class="toast" id="toast"></div>
+<aside class="panel right">
+
+ <div class="rightTitle">STATUS DO IMPÉRIO</div>
+
+ <div class="mini">
+
+  <div class="miniCard">
+   <b>👻 Poder</b>
+   <span id="sidePower">1 por clique</span>
+  </div>
+
+  <div class="miniCard">
+   <b>⚡ Produção</b>
+   <span id="sidePps">0 moedas/s</span>
+  </div>
+
+  <div class="miniCard">
+   <b>🔥 Combo</b>
+   <span id="sideCombo">x1.00</span>
+  </div>
+
+  <div class="miniCard">
+   <b>♻️ Prestígio</b>
+   <span id="sidePrestige">0</span>
+  </div>
+
+  <div class="miniCard">
+   <b>💎 Essência</b>
+   <span id="sideEssence">0</span>
+  </div>
+
+ </div>
+
+ <br>
+
+ <div class="rightTitle">PRÓXIMO OBJETIVO</div>
+
+ <div class="miniCard">
+  <b id="nextObjective">100 cliques</b>
+  <span>Continue evoluindo seu império.</span>
+ </div>
+
+</aside>
+
+</div>
 
 <script>
-
-const SAVE_KEY="ghost_empire_v1";
+const SAVE_KEY="ghost_empire_v2";
 
 const upgradeData={
+ click1:{name:"Treino Fantasma",desc:"+1 força por clique",base:10,type:"click",power:1},
+ click2:{name:"Energia Sombria",desc:"+5 força por clique",base:100,type:"click",power:5},
+ click3:{name:"Núcleo Espectral",desc:"+25 força por clique",base:1000,type:"click",power:25},
+ click4:{name:"Poder Abissal",desc:"+100 força por clique",base:10000,type:"click",power:100},
 
-click1:{
-name:"Treino Fantasma",
-desc:"+1 força por clique",
-base:10,
-type:"click",
-power:1
-},
-
-click2:{
-name:"Energia Sombria",
-desc:"+5 força por clique",
-base:100,
-type:"click",
-power:5
-},
-
-click3:{
-name:"Núcleo Espectral",
-desc:"+25 força por clique",
-base:1000,
-type:"click",
-power:25
-},
-
-click4:{
-name:"Poder Abissal",
-desc:"+100 força por clique",
-base:10000,
-type:"click",
-power:100
-},
-
-auto1:{
-name:"Fantasma Assistente",
-desc:"+1 moeda por segundo",
-base:50,
-type:"auto",
-power:1
-},
-
-auto2:{
-name:"Minerador Sombrio",
-desc:"+10 moedas por segundo",
-base:500,
-type:"auto",
-power:10
-},
-
-auto3:{
-name:"Fábrica Espectral",
-desc:"+100 moedas por segundo",
-base:5000,
-type:"auto",
-power:100
-},
-
-auto4:{
-name:"Império Automático",
-desc:"+1000 moedas por segundo",
-base:50000,
-type:"auto",
-power:1000
-}
-
+ auto1:{name:"Fantasma Assistente",desc:"+1 moeda por segundo",base:50,type:"auto",power:1},
+ auto2:{name:"Minerador Sombrio",desc:"+10 moedas por segundo",base:500,type:"auto",power:10},
+ auto3:{name:"Fábrica Espectral",desc:"+100 moedas por segundo",base:5000,type:"auto",power:100},
+ auto4:{name:"Império Automático",desc:"+1000 moedas por segundo",base:50000,type:"auto",power:1000}
 };
 
+const shopData={
+ essence1:{name:"Alma Fortalecida",desc:"+10% produção permanente",base:5},
+ essence2:{name:"Energia Eterna",desc:"+10% força de clique permanente",base:10},
+ essence3:{name:"Fantasma Supremo",desc:"+25% produção permanente",base:25}
+};
+
+const missionsData=[
+ {id:"click100",name:"Primeiros Passos",desc:"Faça 100 cliques",goal:100,reward:500,type:"clicks"},
+ {id:"coins10k",name:"Pequeno Império",desc:"Produza 10.000 moedas",goal:10000,reward:2500,type:"coins"},
+ {id:"coins1m",name:"Magnata Fantasma",desc:"Produza 1.000.000 moedas",goal:1000000,reward:50000,type:"coins"},
+ {id:"level10",name:"Evolução",desc:"Chegue ao nível 10",goal:10,reward:10000,type:"level"},
+ {id:"prestige1",name:"Renascimento",desc:"Faça seu primeiro prestígio",goal:1,reward:25000,type:"prestige"}
+];
+
+const achievementsData=[
+ {id:"first",name:"Primeira Moeda",desc:"Faça seu primeiro clique",test:g=>g.clicks>=1},
+ {id:"hundred",name:"Cem Cliques",desc:"Faça 100 cliques",test:g=>g.clicks>=100},
+ {id:"rich",name:"Rico",desc:"Tenha 10.000 moedas",test:g=>g.total>=10000},
+ {id:"million",name:"Milionário",desc:"Produza 1.000.000 moedas",test:g=>g.total>=1000000},
+ {id:"level10",name:"Veterano",desc:"Chegue ao nível 10",test:g=>g.level>=10},
+ {id:"prestige",name:"Renascimento",desc:"Faça um prestígio",test:g=>g.prestiges>=1},
+ {id:"combo",name:"Combo Fantasma",desc:"Alcance combo x10",test:g=>g.combo>=10}
+];
+
 let game={
-coins:0,
-total:0,
-clickPower:1,
-pps:0,
-clicks:0,
-xp:0,
-level:1,
-combo:1,
-comboTime:0,
-upgrades:{
-click1:0,
-click2:0,
-click3:0,
-click4:0,
-auto1:0,
-auto2:0,
-auto3:0,
-auto4:0
-},
-missions:{
-clicks:0,
-coins:0,
-auto:0
-},
-achievements:{}
+ coins:0,
+ total:0,
+ clickPower:1,
+ pps:0,
+ clicks:0,
+ autoClicks:0,
+ xp:0,
+ level:1,
+ combo:1,
+ comboTime:0,
+ prestiges:0,
+ essence:0,
+ session:0,
+ upgrades:{},
+ shop:{},
+ missions:{},
+ achievements:{}
 };
 
 const $=id=>document.getElementById(id);
 
-const upgradesPanel = $("upgrades");
-
-if(upgradesPanel){
-  upgradesPanel.addEventListener("click", function(e){
-    const button = e.target.closest("[data-upgrade]");
-
-    if(!button) return;
-
-    const id = button.dataset.upgrade;
-
-    if(!upgradeData[id]) return;
-
-    buyUpgrade(id);
-  });
-}
-
-
 function format(n){
-
-if(n<1000)return Math.floor(n).toLocaleString("pt-BR");
-
-const units=["K","M","B","T","Qa","Qi"];
-
-let i=-1;
-
-while(n>=1000&&i<units.length-1){
-n/=1000;
-i++;
-}
-
-return n.toFixed(n>=100?0:n>=10?1:2)+units[i];
-}
-
-function upgradeCost(data,level){
-
-return Math.floor(data.base*Math.pow(1.15,level));
-
-}
-
-function calculate(){
-
-game.clickPower=1;
-game.pps=0;
-
-for(const id in upgradeData){
-
-const data=upgradeData[id];
-const level=game.upgrades[id];
-
-if(data.type==="click")
-game.clickPower+=data.power*level;
-
-if(data.type==="auto")
-game.pps+=data.power*level;
-
-}
-
-}
-
-function addCoins(amount){
-
-game.coins+=amount;
-game.total+=amount;
-
-gainXP(Math.max(1,Math.floor(amount/10)));
-
-}
-
-function gainXP(amount){
-
-game.xp+=amount;
-
-while(game.xp>=xpNeeded()){
-
-game.xp-=xpNeeded();
-game.level++;
-
-toast("⬆️ Nível "+game.level+" alcançado!");
-
-}
-
+ if(n<1000)return Math.floor(n);
+ const units=["K","M","B","T","Qa","Qi"];
+ let i=-1;
+ while(n>=1000&&i<units.length-1){
+  n/=1000;
+  i++;
+ }
+ return n.toFixed(n<10?2:1)+units[i];
 }
 
 function xpNeeded(){
-
-return Math.floor(100*Math.pow(1.18,game.level-1));
-
+ return Math.floor(100*Math.pow(1.18,game.level-1));
 }
 
-function clickCoin(){
-
-let amount=game.clickPower*game.combo;
-
-addCoins(amount);
-
-game.clicks++;
-
-game.missions.clicks++;
-
-game.combo=Math.min(10,game.combo+.1);
-game.comboTime=2;
-
-showFloat(amount);
-
-checkAchievements();
-
-updateUI();
-
+function upgradeCost(data,level){
+ return Math.floor(data.base*Math.pow(1.15,level));
 }
 
-/* ===== AUTO CLIQUE ===== */
-let autoClickTimer = null;
+function calculate(){
+ game.clickPower=1;
+ game.pps=0;
 
-function startAutoClick(){
-  if(autoClickTimer) return;
+ for(const id in upgradeData){
+  const d=upgradeData[id];
+  const lv=game.upgrades[id]||0;
 
-  autoClickTimer = setInterval(function(){
-    if(typeof clickCoin === "function"){
-      clickCoin();
-    }
-  }, 1000);
+  if(d.type==="click")game.clickPower+=d.power*lv;
+  if(d.type==="auto")game.pps+=d.power*lv;
+ }
+
+ let productionBonus=1+(game.essence*0.10);
+
+ productionBonus+=
+  (game.shop.essence1||0)*0.10+
+  (game.shop.essence3||0)*0.25;
+
+ let clickBonus=1+(game.essence*0.10)+
+  (game.shop.essence2||0)*0.10;
+
+ game.pps*=productionBonus;
+ game.clickPower*=clickBonus;
 }
 
-startAutoClick();
-
-
-$("coin").addEventListener("click",clickCoin);
-
-function showFloat(amount){
-
-const el=document.createElement("div");
-
-el.className="float";
-el.textContent="+"+format(amount);
-
-el.style.left=(Math.random()*50+25)+"%";
-el.style.top=(Math.random()*25+35)+"%";
-
-document.body.appendChild(el);
-
-setTimeout(()=>el.remove(),800);
-
+function addCoins(amount){
+ game.coins+=amount;
+ game.total+=amount;
+ game.session+=amount;
+ gainXP(Math.max(1,Math.floor(amount/10)));
 }
+
+function gainXP(amount){
+ game.xp+=amount;
+
+ while(game.xp>=xpNeeded()){
+  game.xp-=xpNeeded();
+  game.level++;
+  toast("⬆️ Nível "+game.level+"!");
+ }
+}
+
+function clickCoin(auto=false){
+ calculate();
+
+ let amount=game.clickPower*game.combo;
+
+ addCoins(amount);
+
+ if(auto){
+  game.autoClicks++;
+ }else{
+  game.clicks++;
+ }
+
+ game.combo=Math.min(10,game.combo+.1);
+ game.comboTime=2;
+
+ if(!auto)showFloat(amount);
+
+ checkAchievements();
+ updateUI();
+}
+
+$("coin").onclick=()=>clickCoin(false);
 
 function buyUpgrade(id){
-  const data = upgradeData[id];
+ const data=upgradeData[id];
 
-  if(!data){
-    console.error("Upgrade inexistente:", id);
-    return;
-  }
+ if(!data)return;
 
-  if(!game.upgrades) game.upgrades = {};
-  if(typeof game.upgrades[id] !== "number") game.upgrades[id] = 0;
+ const level=game.upgrades[id]||0;
+ const cost=upgradeCost(data,level);
 
-  const level = game.upgrades[id];
-  const cost = upgradeCost(data, level);
+ if(game.coins<cost){
+  toast("❌ Precisa de "+format(cost)+" moedas");
+  return;
+ }
 
-  if(game.coins < cost){
-    toast("❌ Você precisa de " + format(cost) + " moedas");
-    return;
-  }
+ game.coins-=cost;
+ game.upgrades[id]=level+1;
 
-  game.coins -= cost;
-  game.upgrades[id] = level + 1;
-
-  calculate();
-
-  toast("✅ " + data.name + " comprado!");
-
-  save();
-  updateUI();
-}
-
-game.coins-=cost;
-game.upgrades[id]++;
-
-calculate();
-
-toast("✅ "+data.name+" melhorado!");
-
-updateUI();
-save();
-
+ calculate();
+ toast("✅ "+data.name+" LV "+(level+1));
+ save();
+ updateUI();
 }
 
 function renderUpgrades(){
-  const container = $("upgrades");
+ const box=$("upgrades");
+ box.innerHTML="";
 
-  if(!container) return;
+ for(const id in upgradeData){
+  const d=upgradeData[id];
+  const lv=game.upgrades[id]||0;
+  const cost=upgradeCost(d,lv);
+  const can=game.coins>=cost;
 
-  container.innerHTML = "";
+  const b=document.createElement("button");
 
-  for(const id in upgradeData){
-    const data = upgradeData[id];
+  b.className="upgrade"+(can?"":" disabled");
+  b.innerHTML=`
+   <div class="upgradeTop">
+    <div class="upgradeName">${d.name}</div>
+    <div class="level">LV ${lv}</div>
+   </div>
+   <div class="upgradeDesc">${d.desc}</div>
+   <div class="buy">
+    <span>${can?"COMPRAR":"PRECISA DE MAIS MOEDAS"}</span>
+    <span class="cost">🪙 ${format(cost)}</span>
+   </div>
+  `;
 
-    if(!game.upgrades[id]){
-      game.upgrades[id] = 0;
-    }
+  b.onclick=()=>buyUpgrade(id);
 
-    const level = game.upgrades[id];
-    const cost = upgradeCost(data, level);
-    const canBuy = game.coins >= cost;
-
-    const button = document.createElement("button");
-
-    button.type = "button";
-    button.className = "upgrade" + (canBuy ? "" : " disabled");
-    button.dataset.upgrade = id;
-
-    button.innerHTML =
-      '<div class="upgradeTop">' +
-        '<div class="upgradeName">' + data.name + '</div>' +
-        '<div class="level">LV ' + level + '</div>' +
-      '</div>' +
-      '<div class="upgradeDesc">' + data.desc + '</div>' +
-      '<div class="buy">' +
-        '<span>' + (canBuy ? 'COMPRAR' : 'PRECISA DE MAIS MOEDAS') + '</span>' +
-        '<span class="cost">🪙 ' + format(cost) + '</span>' +
-      '</div>';
-
-    button.onclick = function(){
-      buyUpgrade(id);
-    };
-
-    container.appendChild(button);
-  }
+  box.appendChild(b);
+ }
 }
+
+function shopCost(d,lv){
+ return d.base*(lv+1);
+}
+
+function buyShop(id){
+ const d=shopData[id];
+ const lv=game.shop[id]||0;
+ const cost=shopCost(d,lv);
+
+ if(game.essence<cost){
+  toast("❌ Essência insuficiente");
+  return;
+ }
+
+ game.essence-=cost;
+ game.shop[id]=lv+1;
+
+ toast("💎 "+d.name+" comprado!");
+ save();
+ updateUI();
+}
+
+function renderShop(){
+ const box=$("shop");
+ box.innerHTML="";
+
+ for(const id in shopData){
+  const d=shopData[id];
+  const lv=game.shop[id]||0;
+  const cost=shopCost(d,lv);
+  const can=game.essence>=cost;
+
+  const b=document.createElement("button");
+  b.className="upgrade"+(can?"":" disabled");
+
+  b.innerHTML=`
+   <div class="upgradeTop">
+    <div class="upgradeName">💎 ${d.name}</div>
+    <div class="level">LV ${lv}</div>
+   </div>
+   <div class="upgradeDesc">${d.desc}</div>
+   <div class="buy">
+    <span>${can?"COMPRAR":"ESSÊNCIA INSUFICIENTE"}</span>
+    <span class="cost">💎 ${format(cost)}</span>
+   </div>
+  `;
+
+  b.onclick=()=>buyShop(id);
+  box.appendChild(b);
+ }
+}
+
+function missionProgress(m){
+ if(m.type==="clicks")return game.clicks;
+ if(m.type==="coins")return game.total;
+ if(m.type==="level")return game.level;
+ if(m.type==="prestige")return game.prestiges;
+ return 0;
+}
+
 function renderMissions(){
+ const box=$("missions");
+ box.innerHTML="";
 
-$("missions").innerHTML="";
+ for(const m of missionsData){
+  const progress=Math.min(m.goal,missionProgress(m));
+  const done=game.missions[m.id];
 
-for(const m of missionData){
+  const div=document.createElement("div");
+  div.className="card mission"+(done?" done":"");
 
-let value;
+  div.innerHTML=`
+   <div>
+    <b>${m.name}</b>
+    <p>${m.desc}</p>
+    <small>${format(progress)} / ${format(m.goal)}</small>
+   </div>
+   <div>
+    ${done?'<span class="check">✓ COMPLETA</span>':
+    '<span class="cost">🪙 '+format(m.reward)+'</span>'}
+   </div>
+  `;
 
-if(m.id==="clicks")value=game.missions.clicks;
-if(m.id==="coins")value=game.total;
-if(m.id==="auto")value=game.pps;
+  if(!done&&progress>=m.goal){
+   game.missions[m.id]=true;
+   game.coins+=m.reward;
+   toast("🎯 Missão: "+m.name);
+  }
 
-const done=value>=m.target;
-
-const div=document.createElement("div");
-
-div.className="mission";
-
-div.innerHTML=`
-<div class="missionName">${done?"✅":"🎯"} ${m.name}</div>
-<div class="missionDesc">${m.desc}</div>
-<div class="missionDesc">${Math.min(value,m.target).toLocaleString("pt-BR")} / ${m.target.toLocaleString("pt-BR")}</div>
-<div class="reward">+${format(m.reward)} moedas</div>
-`;
-
-if(done && !game["mission_"+m.id]){
-
-game["mission_"+m.id]=true;
-game.coins+=m.reward;
-toast("🎁 Missão concluída!");
-
+  box.appendChild(div);
+ }
 }
-
-$("missions").appendChild(div);
-
-}
-
-}
-
-const achievementData=[
-
-["first","👻","Primeiro contato","Faça 1 clique",1],
-["hundred","⚡","Ritmo","Faça 100 cliques",100],
-["rich","💰","Rico","Tenha 10.000 moedas",10000],
-["million","👑","Magnata","Produza 1.000.000 moedas",1000000],
-["level10","🔥","Ascensão","Chegue ao nível 10",10],
-["combo","💥","Insano","Alcance combo x10",10]
-
-];
 
 function checkAchievements(){
-
-for(const a of achievementData){
-
-let value=0;
-
-if(a[0]==="first")value=game.clicks;
-if(a[0]==="hundred")value=game.clicks;
-if(a[0]==="rich")value=game.coins;
-if(a[0]==="million")value=game.total;
-if(a[0]==="level10")value=game.level;
-if(a[0]==="combo")value=game.combo;
-
-if(value>=a[4]&&!game.achievements[a[0]]){
-
-game.achievements[a[0]]=true;
-
-game.coins+=Math.floor(a[4]*5);
-
-toast("🏆 "+a[2]);
-
-}
-
-}
-
+ for(const a of achievementsData){
+  if(!game.achievements[a.id]&&a.test(game)){
+   game.achievements[a.id]=true;
+   toast("🏆 "+a.name+" desbloqueada!");
+  }
+ }
 }
 
 function renderAchievements(){
+ const box=$("achievements");
+ box.innerHTML="";
 
-$("achievements").innerHTML="";
+ for(const a of achievementsData){
+  const unlocked=game.achievements[a.id];
 
-for(const a of achievementData){
+  const div=document.createElement("div");
+  div.className="card achievement "+(unlocked?"":"locked");
 
-const unlocked=game.achievements[a[0]];
+  div.innerHTML=`
+   <div class="achIcon">${unlocked?"🏆":"🔒"}</div>
+   <div>
+    <b>${a.name}</b>
+    <p>${a.desc}</p>
+   </div>
+  `;
 
-const div=document.createElement("div");
-
-div.className="achievement"+(unlocked?"":" locked");
-
-div.innerHTML=`
-<div class="achievementIcon">${a[1]}</div>
-<div>
-<strong>${a[2]}</strong>
-<div style="font-size:10px;color:#85858f">${a[3]}</div>
-</div>
-`;
-
-$("achievements").appendChild(div);
-
+  box.appendChild(div);
+ }
 }
 
+function prestigeGain(){
+ return Math.floor(Math.sqrt(game.total/10000));
+}
+
+$("prestigeButton").onclick=()=>{
+ const gain=prestigeGain();
+
+ if(gain<1){
+  toast("❌ Produza pelo menos 10.000 moedas");
+  return;
+ }
+
+ if(!confirm("Realizar prestígio e reiniciar suas moedas/upgrades?")){
+  return;
+ }
+
+ game.prestiges++;
+ game.essence+=gain;
+
+ game.coins=0;
+ game.total=0;
+ game.clicks=0;
+ game.autoClicks=0;
+ game.xp=0;
+ game.level=1;
+ game.combo=1;
+ game.comboTime=0;
+ game.session=0;
+ game.upgrades={};
+ game.missions={};
+
+ toast("♻️ Prestígio realizado! +"+gain+" Essência");
+
+ save();
+ updateUI();
+};
+
+function toast(msg){
+ const old=document.querySelector(".toast");
+ if(old)old.remove();
+
+ const t=document.createElement("div");
+ t.className="toast";
+ t.textContent=msg;
+ document.body.appendChild(t);
+
+ setTimeout(()=>t.remove(),1800);
+}
+
+function showFloat(amount){
+ const f=document.createElement("div");
+ f.className="float";
+ f.textContent="+"+format(amount)+" 🪙";
+
+ f.style.left=(window.innerWidth/2-30+Math.random()*50)+"px";
+ f.style.top=(window.innerHeight/2-80)+"px";
+
+ document.body.appendChild(f);
+
+ setTimeout(()=>f.remove(),1000);
 }
 
 function updateUI(){
+ calculate();
+ checkAchievements();
 
-calculate();
+ $("coins").textContent=format(game.coins);
+ $("clickPower").textContent=format(game.clickPower);
+ $("pps").textContent=format(game.pps);
+ $("total").textContent=format(game.total);
 
-$("coins").textContent=format(game.coins);
-$("topCoins").textContent=format(game.coins);
+ $("clickCount").textContent=format(game.clicks);
+ $("autoClicks").textContent=format(game.autoClicks);
+ $("session").textContent=format(game.session);
+ $("prestigeCount").textContent=game.prestiges;
 
-$("pps").textContent=format(game.pps)+"/s";
-$("topPps").textContent=format(game.pps)+"/s";
+ $("headerLevel").textContent=game.level;
+ $("headerEssence").textContent=format(game.essence);
+ $("headerPrestige").textContent=game.prestiges;
 
-$("clickPower").textContent="+"+format(game.clickPower);
+ $("sidePower").textContent=format(game.clickPower)+" por clique";
+ $("sidePps").textContent=format(game.pps)+" moedas/s";
+ $("sideCombo").textContent="x"+game.combo.toFixed(2);
+ $("sidePrestige").textContent=game.prestiges;
+ $("sideEssence").textContent=format(game.essence);
 
-$("total").textContent=format(game.total);
-$("clicks").textContent=game.clicks.toLocaleString("pt-BR");
+ const need=xpNeeded();
+ const percent=Math.min(100,(game.xp/need)*100);
 
-$("level").textContent=game.level;
-$("topLevel").textContent=game.level;
+ $("xpBar").style.width=percent+"%";
+ $("xpText").textContent=Math.floor(game.xp)+" / "+need+" XP";
 
-$("comboValue").textContent="x"+game.combo.toFixed(1);
+ const ranks=[
+  [1,"RECRUTA"],
+  [5,"CAÇADOR"],
+  [10,"MESTRE"],
+  [25,"LORDE"],
+  [50,"IMPERADOR"],
+  [100,"ENTIDADE"]
+ ];
 
-const need=xpNeeded();
+ let rank="RECRUTA";
 
-$("xpText").textContent=
-Math.floor(game.xp)+" / "+need;
+ for(const r of ranks){
+  if(game.level>=r[0])rank=r[1];
+ }
 
-$("xpBar").style.width=
-Math.min(100,game.xp/need*100)+"%";
+ $("rank").textContent=rank;
 
-if(game.level>=25)
-$("rank").textContent="Senhor do Império";
-else if(game.level>=15)
-$("rank").textContent="Magnata Fantasma";
-else if(game.level>=10)
-$("rank").textContent="Mestre Sombrio";
-else if(game.level>=5)
-$("rank").textContent="Empresário";
-else
-$("rank").textContent="Novato";
+ $("combo").textContent=game.combo.toFixed(2);
 
-renderUpgrades();
-renderMissions();
-renderAchievements();
+ $("prestigeGain").textContent=prestigeGain();
 
-}
+ renderUpgrades();
+ renderShop();
+ renderMissions();
+ renderAchievements();
 
-function toast(text){
-
-const el=$("toast");
-
-el.textContent=text;
-el.classList.add("show");
-
-clearTimeout(toast.timer);
-
-toast.timer=setTimeout(
-()=>el.classList.remove("show"),
-2200
-);
-
+ $("nextObjective").textContent=
+  game.clicks<100?"100 cliques":
+  game.total<10000?"10.000 moedas":
+  game.level<10?"Nível 10":
+  "Primeiro prestígio";
 }
 
 function save(){
-
-localStorage.setItem(
-SAVE_KEY,
-JSON.stringify(game)
-);
-
+ localStorage.setItem(SAVE_KEY,JSON.stringify(game));
 }
 
 function load(){
+ try{
+  const saved=JSON.parse(localStorage.getItem(SAVE_KEY));
 
-try{
+  if(saved){
+   game=Object.assign(game,saved);
 
-const data=JSON.parse(
-localStorage.getItem(SAVE_KEY)
-);
-
-if(data){
-
-game={...game,...data};
-
-game.upgrades={
-...game.upgrades,
-...(data.upgrades||{})
-};
-
-game.achievements={
-...game.achievements,
-...(data.achievements||{})
-};
-
-}
-
-}catch(e){
-
-console.log("Save inválido");
-
-}
-
-calculate();
-
+   game.upgrades=game.upgrades||{};
+   game.shop=game.shop||{};
+   game.missions=game.missions||{};
+   game.achievements=game.achievements||{};
+  }
+ }catch(e){
+  console.error(e);
+ }
 }
 
 $("save").onclick=()=>{
-
-save();
-toast("💾 Jogo salvo!");
-
+ save();
+ toast("💾 Jogo salvo!");
 };
 
 $("reset").onclick=()=>{
-
-if(confirm("Tem certeza que deseja apagar todo o progresso?")){
-
-localStorage.removeItem(SAVE_KEY);
-location.reload();
-
-}
-
+ if(confirm("Apagar TODO o progresso?")){
+  localStorage.removeItem(SAVE_KEY);
+  location.reload();
+ }
 };
 
-let last=performance.now();
+/* ===== ABAS ===== */
 
-function loop(now){
+document.querySelectorAll(".nav button").forEach(button=>{
+ button.onclick=()=>{
+  document.querySelectorAll(".nav button")
+   .forEach(b=>b.classList.remove("active"));
 
-const delta=(now-last)/1000;
-last=now;
+  button.classList.add("active");
 
-if(game.pps>0){
+  document.querySelectorAll(".page")
+   .forEach(p=>p.classList.remove("active"));
 
-const amount=game.pps*delta;
+  $("page-"+button.dataset.page).classList.add("active");
+ };
+});
 
-game.coins+=amount;
-game.total+=amount;
+/* ===== AUTO CLIQUE ===== */
 
-}
+let autoTimer=null;
 
-if(game.comboTime>0){
+function startAutoClick(){
+ if(autoTimer)return;
 
-game.comboTime-=delta;
-
-}else{
-
-game.combo=Math.max(1,game.combo-delta*.25);
-
-}
-
-updateUI();
-
-requestAnimationFrame(loop);
-
+ autoTimer=setInterval(()=>{
+  clickCoin(true);
+ },1000);
 }
 
 load();
 updateUI();
+startAutoClick();
 
-setInterval(save,5000);
+let last=performance.now();
+
+function loop(now){
+ const delta=(now-last)/1000;
+ last=now;
+
+ if(game.pps>0){
+  const amount=game.pps*delta;
+
+  game.coins+=amount;
+  game.total+=amount;
+  game.session+=amount;
+ }
+
+ if(game.comboTime>0){
+  game.comboTime-=delta;
+ }else{
+  game.combo=Math.max(1,game.combo-delta*.25);
+ }
+
+ updateUI();
+
+ requestAnimationFrame(loop);
+}
 
 requestAnimationFrame(loop);
 
+setInterval(save,5000);
 </script>
 
 </body>
