@@ -854,17 +854,33 @@ setTimeout(()=>el.remove(),800);
 }
 
 function buyUpgrade(id){
+  const data = upgradeData[id];
 
-const data=upgradeData[id];
-const level=game.upgrades[id];
-const cost=upgradeCost(data,level);
+  if(!data){
+    console.error("Upgrade inexistente:", id);
+    return;
+  }
 
-if(game.coins<cost){
+  if(!game.upgrades) game.upgrades = {};
+  if(typeof game.upgrades[id] !== "number") game.upgrades[id] = 0;
 
-toast("❌ Moedas insuficientes");
+  const level = game.upgrades[id];
+  const cost = upgradeCost(data, level);
 
-return;
+  if(game.coins < cost){
+    toast("❌ Você precisa de " + format(cost) + " moedas");
+    return;
+  }
 
+  game.coins -= cost;
+  game.upgrades[id] = level + 1;
+
+  calculate();
+
+  toast("✅ " + data.name + " comprado!");
+
+  save();
+  updateUI();
 }
 
 game.coins-=cost;
@@ -881,34 +897,42 @@ save();
 
 function renderUpgrades(){
   const container = $("upgrades");
+
   if(!container) return;
 
   container.innerHTML = "";
 
   for(const id in upgradeData){
     const data = upgradeData[id];
-    const level = game.upgrades[id] || 0;
+
+    if(!game.upgrades[id]){
+      game.upgrades[id] = 0;
+    }
+
+    const level = game.upgrades[id];
     const cost = upgradeCost(data, level);
     const canBuy = game.coins >= cost;
 
     const button = document.createElement("button");
+
     button.type = "button";
     button.className = "upgrade" + (canBuy ? "" : " disabled");
     button.dataset.upgrade = id;
 
-    button.innerHTML = `
-      <div class="upgradeTop">
-        <div class="upgradeName">${data.name}</div>
-        <div class="level">LV ${level}</div>
-      </div>
+    button.innerHTML =
+      '<div class="upgradeTop">' +
+        '<div class="upgradeName">' + data.name + '</div>' +
+        '<div class="level">LV ' + level + '</div>' +
+      '</div>' +
+      '<div class="upgradeDesc">' + data.desc + '</div>' +
+      '<div class="buy">' +
+        '<span>' + (canBuy ? 'COMPRAR' : 'PRECISA DE MAIS MOEDAS') + '</span>' +
+        '<span class="cost">🪙 ' + format(cost) + '</span>' +
+      '</div>';
 
-      <div class="upgradeDesc">${data.desc}</div>
-
-      <div class="buy">
-        <span>${canBuy ? "COMPRAR" : "PRECISA DE MAIS MOEDAS"}</span>
-        <span class="cost">🪙 ${format(cost)}</span>
-      </div>
-    `;
+    button.onclick = function(){
+      buyUpgrade(id);
+    };
 
     container.appendChild(button);
   }
