@@ -725,6 +725,23 @@ achievements:{}
 
 const $=id=>document.getElementById(id);
 
+const upgradesPanel = $("upgrades");
+
+if(upgradesPanel){
+  upgradesPanel.addEventListener("click", function(e){
+    const button = e.target.closest("[data-upgrade]");
+
+    if(!button) return;
+
+    const id = button.dataset.upgrade;
+
+    if(!upgradeData[id]) return;
+
+    buyUpgrade(id);
+  });
+}
+
+
 function format(n){
 
 if(n<1000)return Math.floor(n).toLocaleString("pt-BR");
@@ -863,79 +880,39 @@ save();
 }
 
 function renderUpgrades(){
+  const container = $("upgrades");
+  if(!container) return;
 
-$("upgrades").innerHTML="";
+  container.innerHTML = "";
 
-for(const id in upgradeData){
+  for(const id in upgradeData){
+    const data = upgradeData[id];
+    const level = game.upgrades[id] || 0;
+    const cost = upgradeCost(data, level);
+    const canBuy = game.coins >= cost;
 
-const data=upgradeData[id];
-const level=game.upgrades[id];
-const cost=upgradeCost(data,level);
-const canBuy=game.coins>=cost;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "upgrade" + (canBuy ? "" : " disabled");
+    button.dataset.upgrade = id;
 
-const button=document.createElement("button");
+    button.innerHTML = `
+      <div class="upgradeTop">
+        <div class="upgradeName">${data.name}</div>
+        <div class="level">LV ${level}</div>
+      </div>
 
-button.type="button";
-button.className="upgrade"+(canBuy?"":" disabled");
-button.dataset.upgrade=id;
+      <div class="upgradeDesc">${data.desc}</div>
 
-button.innerHTML=`
-<div class="upgradeTop">
-<div class="upgradeName">${data.name}</div>
-<div class="level">LV ${level}</div>
-</div>
+      <div class="buy">
+        <span>${canBuy ? "COMPRAR" : "PRECISA DE MAIS MOEDAS"}</span>
+        <span class="cost">🪙 ${format(cost)}</span>
+      </div>
+    `;
 
-<div class="upgradeDesc">${data.desc}</div>
-
-<div class="buy">
-<span>${canBuy?"COMPRAR":"PRECISA DE MAIS MOEDAS"}</span>
-<span class="cost">🪙 ${format(cost)}</span>
-</div>
-`;
-
-button.addEventListener("click",function(e){
-
-e.preventDefault();
-e.stopPropagation();
-
-buyUpgrade(id);
-
-});
-
-$("upgrades").appendChild(button);
-
+    container.appendChild(button);
+  }
 }
-
-}
-
-const missionData=[
-
-{
-id:"clicks",
-name:"Primeiros passos",
-desc:"Faça 100 cliques",
-target:100,
-reward:500
-},
-
-{
-id:"coins",
-name:"Pequeno império",
-desc:"Produza 10.000 moedas",
-target:10000,
-reward:2500
-},
-
-{
-id:"auto",
-name:"Máquina fantasma",
-desc:"Alcance 100 moedas/s",
-target:100,
-reward:10000
-}
-
-];
-
 function renderMissions(){
 
 $("missions").innerHTML="";
