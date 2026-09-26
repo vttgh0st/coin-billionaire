@@ -1,0 +1,1696 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COIN BILLIONAIRE</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg: #050505;
+    --panel: #0d0d0d;
+    --panel2: #141414;
+    --border: #252525;
+    --text: #f5f5f5;
+    --muted: #858585;
+    --gold: #f5c542;
+    --gold2: #ffdf70;
+    --green: #22c55e;
+    --red: #ef4444;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Inter, system-ui, Arial, sans-serif;
+    color: var(--text);
+    background:
+        radial-gradient(circle at center, #151515 0%, #070707 42%, #020202 100%);
+    overflow-x: hidden;
+}
+
+button {
+    font: inherit;
+}
+
+.game {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* HEADER */
+
+header {
+    min-height: 92px;
+    padding: 15px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background: rgba(5,5,5,.95);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    z-index: 5;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 1000;
+    letter-spacing: 3px;
+    white-space: nowrap;
+}
+
+.logo span {
+    color: var(--gold);
+}
+
+.stats {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.stat {
+    min-width: 135px;
+    padding: 9px 15px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    text-align: center;
+}
+
+.stat-label {
+    display: block;
+    color: var(--muted);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+}
+
+.stat-value {
+    display: block;
+    margin-top: 3px;
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--gold2);
+}
+
+/* MAIN */
+
+main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 390px;
+    min-height: calc(100vh - 92px);
+}
+
+/* CLICK AREA */
+
+.click-area {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 35px;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.title h1 {
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 1000;
+    letter-spacing: -2px;
+}
+
+.title p {
+    color: var(--muted);
+    margin-top: 7px;
+}
+
+.rank {
+    margin-top: 12px;
+    display: inline-block;
+    padding: 6px 14px;
+    border: 1px solid #3a3015;
+    border-radius: 999px;
+    color: var(--gold2);
+    background: rgba(245,197,66,.06);
+    font-size: 12px;
+    font-weight: 800;
+}
+
+/* COIN */
+
+.coin-wrapper {
+    width: 310px;
+    height: 310px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.coin-glow {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: .13;
+    filter: blur(40px);
+    animation: glow 3s ease-in-out infinite;
+}
+
+@keyframes glow {
+    0%,100% {
+        transform: scale(.9);
+        opacity: .08;
+    }
+
+    50% {
+        transform: scale(1.12);
+        opacity: .2;
+    }
+}
+
+#coin {
+    position: relative;
+    width: 230px;
+    height: 230px;
+    border-radius: 50%;
+    border: 5px solid #c49a24;
+    cursor: pointer;
+    color: #4d3600;
+
+    background:
+        radial-gradient(
+            circle at 35% 25%,
+            #fff2a8,
+            #f5c542 35%,
+            #c99316 70%,
+            #805d08 100%
+        );
+
+    box-shadow:
+        0 0 35px rgba(245,197,66,.25),
+        inset 0 0 25px rgba(255,255,255,.4),
+        inset 0 -15px 25px rgba(70,40,0,.25);
+
+    transition:
+        transform .08s ease,
+        box-shadow .2s ease;
+}
+
+#coin:hover {
+    box-shadow:
+        0 0 55px rgba(245,197,66,.4),
+        inset 0 0 30px rgba(255,255,255,.5);
+}
+
+#coin:active {
+    transform: scale(.9) rotate(-2deg);
+}
+
+.coin-symbol {
+    display: block;
+    font-size: 80px;
+    line-height: 1;
+    font-weight: 1000;
+    text-shadow: 2px 3px 0 rgba(100,65,0,.3);
+}
+
+.coin-label {
+    display: block;
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 1000;
+    letter-spacing: 3px;
+}
+
+/* FLOATING */
+
+.float {
+    position: absolute;
+    pointer-events: none;
+    color: var(--gold2);
+    font-size: 22px;
+    font-weight: 1000;
+    text-shadow: 0 0 12px rgba(245,197,66,.6);
+    animation: floatUp .85s ease-out forwards;
+}
+
+@keyframes floatUp {
+    from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-100px) scale(1.25);
+    }
+}
+
+/* SHOP */
+
+.shop {
+    background: rgba(10,10,10,.98);
+    border-left: 1px solid var(--border);
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.shop-title {
+    margin-bottom: 15px;
+}
+
+.shop-title h2 {
+    font-size: 23px;
+}
+
+.shop-title p {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+/* UPGRADES */
+
+.upgrade {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px;
+    margin-bottom: 9px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--panel);
+    cursor: pointer;
+    transition: .18s ease;
+}
+
+.upgrade:hover {
+    background: var(--panel2);
+    border-color: #444;
+    transform: translateY(-1px);
+}
+
+.upgrade:active {
+    transform: scale(.98);
+}
+
+.upgrade.disabled {
+    opacity: .42;
+}
+
+.icon {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: #1b1b1b;
+    font-size: 23px;
+}
+
+.info {
+    flex: 1;
+    min-width: 0;
+}
+
+.name {
+    font-size: 14px;
+    font-weight: 900;
+}
+
+.description {
+    margin-top: 3px;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.level {
+    margin-top: 6px;
+    color: var(--gold2);
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.buy {
+    text-align: right;
+    min-width: 65px;
+}
+
+.cost {
+    color: var(--gold2);
+    font-size: 13px;
+    font-weight: 900;
+}
+
+.buy-text {
+    display: block;
+    margin-top: 3px;
+    color: var(--muted);
+    font-size: 9px;
+    text-transform: uppercase;
+}
+
+/* SECTIONS */
+
+.section-title {
+    margin: 22px 0 10px;
+    color: #777;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* ACTIONS */
+
+.actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 18px;
+}
+
+.action {
+    border: 1px solid var(--border);
+    background: #141414;
+    color: #aaa;
+    border-radius: 9px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.action:hover {
+    background: #1d1d1d;
+    color: white;
+}
+
+#reset {
+    color: #b77;
+}
+
+.save-status {
+    margin-top: 10px;
+    text-align: center;
+    color: #555;
+    font-size: 10px;
+}
+
+/* ACHIEVEMENTS */
+
+.achievement {
+    padding: 11px;
+    border: 1px solid var(--border);
+    background: #0c0c0c;
+    border-radius: 10px;
+    margin-bottom: 7px;
+    font-size: 11px;
+}
+
+.achievement.done {
+    border-color: #4b3d12;
+    color: var(--gold2);
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+
+    header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .stats {
+        justify-content: center;
+    }
+
+    main {
+        grid-template-columns: 1fr;
+    }
+
+    .shop {
+        border-left: none;
+        border-top: 1px solid var(--border);
+    }
+
+    .click-area {
+        min-height: 560px;
+    }
+}
+
+@media (max-width: 500px) {
+
+    header {
+        padding: 14px;
+    }
+
+    .logo {
+        text-align: center;
+    }
+
+    .stats {
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+    }
+
+    .stat {
+        min-width: 0;
+        padding: 8px 4px;
+    }
+
+    .stat-value {
+        font-size: 16px;
+    }
+
+    .coin-wrapper {
+        transform: scale(.85);
+    }
+
+    .shop {
+        padding: 14px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="game">
+
+<header>
+
+    <div class="logo">
+        COIN<span>BILLIONAIRE</span>
+    </div>
+
+    <div class="stats">
+
+        <div class="stat">
+            <span class="stat-label">Moedas</span>
+            <span class="stat-value" id="points">0</span>
+        </div>
+
+        <div class="stat">
+            <span class="stat-label">Por Segundo</span>
+            <span class="stat-value" id="pps">0</span>
+        </div>
+
+        <div class="stat">
+            <span class="stat-label">Por Clique</span>
+            <span class="stat-value" id="clickPower">+1</span>
+        </div>
+
+    </div>
+
+</header>
+
+<main>
+
+<section class="click-area" id="clickArea">
+
+    <div class="title">
+
+        <h1>TORNE-SE BILIONÁRIO</h1>
+
+        <p>
+            Clique na moeda e construa seu império.
+        </p>
+
+        <div class="rank" id="rank">
+            Pobre
+        </div>
+
+    </div>
+
+    <div class="coin-wrapper">
+
+        <div class="coin-glow"></div>
+
+        <button id="coin">
+
+            <span class="coin-symbol">₿</span>
+
+            <span class="coin-label">
+                CLIQUE
+            </span>
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<aside class="shop">
+
+    <div class="shop-title">
+
+        <h2>🏦 Império</h2>
+
+        <p>
+            Invista suas moedas e fique cada vez mais rico.
+        </p>
+
+    </div>
+
+
+    <div class="section-title">
+        Melhorias de Clique
+    </div>
+
+
+    <!-- BRONZE -->
+
+    <div class="upgrade" id="u1">
+
+        <div class="icon">🪙</div>
+
+        <div class="info">
+
+            <div class="name">
+                Moeda de Bronze
+            </div>
+
+            <div class="description">
+                +1 moeda por clique
+            </div>
+
+            <div class="level">
+                Nível <span id="l1">0</span>
+            </div>
+
+        </div>
+
+        <div class="buy">
+            <div class="cost" id="c1">10</div>
+            <span class="buy-text">Comprar</span>
+        </div>
+
+    </div>
+
+
+    <!-- PRATA -->
+
+    <div class="upgrade" id="u2">
+
+        <div class="icon">🥈</div>
+
+        <div class="info">
+
+            <div class="name">
+                Clique de Prata
+            </div>
+
+            <div class="description">
+                +5 moedas por clique
+            </div>
+
+            <div class="level">
+                Nível <span id="l2">0</span>
+            </div>
+
+        </div>
+
+        <div class="buy">
+            <div class="cost" id="c2">100</div>
+            <span class="buy-text">Comprar</span>
+        </div>
+
+    </div>
+
+
+    <!-- OURO -->
+
+    <div class="upgrade" id="u3">
+
+        <div class="icon">🥇</div>
+
+        <div class="info">
+
+            <div class="name">
+                Clique de Ouro
+            </div>
+
+            <div class="description">
+                +25 moedas por clique
+            </div>
+
+            <div class="level">
+                Nível <span id="l3">0</span>
+            </div>
+
+        </div>
+
+        <div class="buy">
+            <div class="cost" id="c3">1K</div>
+            <span class="buy-text">Comprar</span>
+        </div>
+
+    </div>
+
+
+    <!-- DIAMANTE -->
+
+    <div class="upgrade" id="u4">
+
+        <div class="icon">💎</div>
+
+        <div class="info">
+
+            <div class="name">
+                Clique de Diamante
+            </div>
+
+            <div class="description">
+                +100 moedas por clique
+            </div>
+
+            <div class="level">
+                Nível <span id="l4">0</span>
+            </div>
+
+        </div>
+
+        <div class="buy">
+            <div class="cost" id="c4">10K</div>
+            <span class="buy-text">Comprar</span>
+        </div>
+
+    </div>
+
+
+    <!-- MULTIPLICADOR -->
+
+    <div class="upgrade" id="u5">
+
+        <div class="icon">👑</div>
+
+        <div class="info">
+
+            <div class="name">
+                Toque Bilionário
+            </div>
+
+            <div class="description">
+                Multiplica o clique em 2x
+            </div>
+
+            <div class="level">
+                Nível <span id="l5">0</span>
+            </div>
+
+        </div>
+
+        <div class="buy">
+            <div class="cost" id="c5">100K</div>
+            <span class="buy-text">Comprar</span>
+        </div>
+
+    </div>
+
+
+    <div class="section-title">
+        Produção Automática
+    </div>
+
+
+    <!-- MINERADOR -->
+
+    <div class="upgrade" id="u6">
+
+        <div class="icon">⛏️</div>
+
+        <div class="info">
+
+            <div class="name">
+                Minerador
+            </div>
+
+            <div class="description">
+                +1 moeda por segundo
+            </div>
+
+            <div class="level">
+                Contratados <span id="l6">0</span>
+            </div>
+
+        </div>
+
+        <div class="buy">
+            <div class="cost" id="c6">50</div>
+            <span class="buy-text">Comprar</span>
+        </div>
+
+    </div>
+
+
+    <!-- FÁBRICA -->
+
+    <div class="upgrade" id="u7">
+
+        <div class="icon">🏭</div>
+
+        <div class="info">
+
+            <div class="name">
+                Fábrica
+            </div>
+
+            <div class="description">
+                +10 moedas por segundo
+            </div>
+
+            <div class="level">
+                Nível <span id="l7">0</span>
+            </div>
+
+        </div>
+
+        <div class="buy">
+            <div class="cost" id="c7">2.5K</div>
+            <span class="buy-text">Comprar</span>
+        </div>
+
+    </div>
+
+
+    <!-- BANCO -->
+
+    <div class="upgrade" id="u8">
+
+        <div class="icon">🏦</div>
+
+        <div class="info">
+
+            <div class="name">
+                Banco
+            </div>
+
+            <div class="description">
+                +100 moedas por segundo
+            </div>
+
+            <div class="level">
+                Nível <span id="l8">0</span>
+            </div>
+
+        </div>
+
+        <div class="buy">
+            <div class="cost" id="c8">100K</div>
+            <span class="buy-text">Comprar</span>
+        </div>
+
+    </div>
+
+
+    <div class="section-title">
+        Conquistas
+    </div>
+
+
+    <div class="achievement" id="a1">
+        🪙 Primeira moeda — 1 moeda
+    </div>
+
+    <div class="achievement" id="a2">
+        💰 Milionário — 1 milhão
+    </div>
+
+    <div class="achievement" id="a3">
+        💎 Bilionário — 1 bilhão
+    </div>
+
+    <div class="achievement" id="a4">
+        👑 Trilionário — 1 trilhão
+    </div>
+
+
+    <div class="actions">
+
+        <button class="action" id="save">
+            💾 Salvar
+        </button>
+
+        <button class="action" id="reset">
+            🗑 Resetar
+        </button>
+
+    </div>
+
+    <div class="save-status" id="saveStatus">
+        Salvamento automático ativo
+    </div>
+
+</aside>
+
+</main>
+
+</div>
+
+
+<script>
+"use strict";
+
+/* =========================================================
+   CONFIGURAÇÃO
+========================================================= */
+
+const SAVE_KEY = "coin_billionaire_save_v2";
+
+const MULTIPLIER = 1.15;
+
+
+/*
+    Cada melhoria possui:
+
+    base = preço inicial
+    add = quanto adiciona
+    type = click / auto / multi
+*/
+
+const upgrades = {
+
+    u1: {
+        base: 10,
+        add: 1,
+        type: "click"
+    },
+
+    u2: {
+        base: 100,
+        add: 5,
+        type: "click"
+    },
+
+    u3: {
+        base: 1000,
+        add: 25,
+        type: "click"
+    },
+
+    u4: {
+        base: 10000,
+        add: 100,
+        type: "click"
+    },
+
+    u5: {
+        base: 100000,
+        add: 2,
+        type: "multi"
+    },
+
+    u6: {
+        base: 50,
+        add: 1,
+        type: "auto"
+    },
+
+    u7: {
+        base: 2500,
+        add: 10,
+        type: "auto"
+    },
+
+    u8: {
+        base: 100000,
+        add: 100,
+        type: "auto"
+    }
+
+};
+
+
+/* =========================================================
+   ESTADO
+========================================================= */
+
+let game = {
+
+    coins: 0,
+
+    clickPower: 1,
+
+    clickMultiplier: 1,
+
+    totalClicks: 0,
+
+    upgrades: {
+
+        u1: 0,
+        u2: 0,
+        u3: 0,
+        u4: 0,
+        u5: 0,
+        u6: 0,
+        u7: 0,
+        u8: 0
+
+    }
+
+};
+
+
+/* =========================================================
+   ELEMENTOS
+========================================================= */
+
+const coin =
+    document.getElementById("coin");
+
+const clickArea =
+    document.getElementById("clickArea");
+
+const points =
+    document.getElementById("points");
+
+const pps =
+    document.getElementById("pps");
+
+const clickPower =
+    document.getElementById("clickPower");
+
+const rank =
+    document.getElementById("rank");
+
+const saveStatus =
+    document.getElementById("saveStatus");
+
+
+/* =========================================================
+   FORMATAÇÃO DE NÚMEROS
+========================================================= */
+
+function formatNumber(value) {
+
+    if (!Number.isFinite(value)) {
+        return "∞";
+    }
+
+    if (value < 1000) {
+        return Math.floor(value).toString();
+    }
+
+    const units = [
+        "",
+        "K",
+        "M",
+        "B",
+        "T",
+        "Qa",
+        "Qi"
+    ];
+
+    let index = 0;
+
+    while (
+        value >= 1000 &&
+        index < units.length - 1
+    ) {
+
+        value /= 1000;
+        index++;
+
+    }
+
+    if (value >= 100) {
+        return value.toFixed(0) + units[index];
+    }
+
+    if (value >= 10) {
+        return value.toFixed(1) + units[index];
+    }
+
+    return value.toFixed(2) + units[index];
+}
+
+
+/* =========================================================
+   PREÇO EXPONENCIAL
+========================================================= */
+
+function getCost(id) {
+
+    const upgrade =
+        upgrades[id];
+
+    const amount =
+        game.upgrades[id];
+
+    return Math.floor(
+        upgrade.base *
+        Math.pow(
+            MULTIPLIER,
+            amount
+        )
+    );
+
+}
+
+
+/* =========================================================
+   PRODUÇÃO AUTOMÁTICA
+========================================================= */
+
+function getPPS() {
+
+    let total = 0;
+
+    for (const id in upgrades) {
+
+        const upgrade =
+            upgrades[id];
+
+        if (upgrade.type === "auto") {
+
+            total +=
+                game.upgrades[id] *
+                upgrade.add;
+
+        }
+
+    }
+
+    return total;
+
+}
+
+
+/* =========================================================
+   PODER DO CLIQUE
+========================================================= */
+
+function calculateClickPower() {
+
+    let power = 1;
+
+    for (const id in upgrades) {
+
+        const upgrade =
+            upgrades[id];
+
+        if (upgrade.type === "click") {
+
+            power +=
+                game.upgrades[id] *
+                upgrade.add;
+
+        }
+
+    }
+
+    return power *
+        game.clickMultiplier;
+
+}
+
+
+/* =========================================================
+   RANK
+========================================================= */
+
+function updateRank() {
+
+    const value =
+        game.coins;
+
+    let title = "Pobre";
+
+    if (value >= 100) {
+        title = "🪙 Colecionador";
+    }
+
+    if (value >= 1000) {
+        title = "💰 Rico";
+    }
+
+    if (value >= 100000) {
+        title = "💵 Milionário em potencial";
+    }
+
+    if (value >= 1000000) {
+        title = "💎 Milionário";
+    }
+
+    if (value >= 100000000) {
+        title = "🏦 Magnata";
+    }
+
+    if (value >= 1000000000) {
+        title = "👑 BILIONÁRIO";
+    }
+
+    if (value >= 1000000000000) {
+        title = "🌌 TRILIONÁRIO";
+    }
+
+    rank.textContent =
+        title;
+
+}
+
+
+/* =========================================================
+   ATUALIZAR INTERFACE
+========================================================= */
+
+function updateUI() {
+
+    const currentClickPower =
+        calculateClickPower();
+
+    const currentPPS =
+        getPPS();
+
+
+    points.textContent =
+        formatNumber(game.coins);
+
+    pps.textContent =
+        formatNumber(currentPPS);
+
+    clickPower.textContent =
+        "+" +
+        formatNumber(currentClickPower);
+
+
+    for (const id in upgrades) {
+
+        const level =
+            game.upgrades[id];
+
+        const cost =
+            getCost(id);
+
+        const levelElement =
+            document.getElementById(
+                "l" + id.substring(1)
+            );
+
+        const costElement =
+            document.getElementById(
+                "c" + id.substring(1)
+            );
+
+        const card =
+            document.getElementById(id);
+
+        if (levelElement) {
+
+            levelElement.textContent =
+                level;
+
+        }
+
+        if (costElement) {
+
+            costElement.textContent =
+                formatNumber(cost);
+
+        }
+
+        if (card) {
+
+            if (game.coins < cost) {
+
+                card.classList.add(
+                    "disabled"
+                );
+
+            } else {
+
+                card.classList.remove(
+                    "disabled"
+                );
+
+            }
+
+        }
+
+    }
+
+
+    updateRank();
+
+    updateAchievements();
+
+}
+
+
+/* =========================================================
+   COMPRAR UPGRADE
+========================================================= */
+
+function buyUpgrade(id) {
+
+    const cost =
+        getCost(id);
+
+    if (game.coins < cost) {
+
+        return;
+
+    }
+
+    game.coins -= cost;
+
+    game.upgrades[id]++;
+
+    if (
+        upgrades[id].type === "multi"
+    ) {
+
+        game.clickMultiplier *=
+            upgrades[id].add;
+
+    }
+
+    updateUI();
+
+    saveGame();
+
+}
+
+
+/* =========================================================
+   CLIQUE NA MOEDA
+========================================================= */
+
+coin.addEventListener(
+    "click",
+    function(event) {
+
+        const amount =
+            calculateClickPower();
+
+        game.coins += amount;
+
+        game.totalClicks++;
+
+        createFloatingNumber(
+            amount,
+            event.clientX,
+            event.clientY
+        );
+
+        updateUI();
+
+        scheduleSave();
+
+    }
+);
+
+
+/* =========================================================
+   NÚMERO FLUTUANTE
+========================================================= */
+
+function createFloatingNumber(
+    amount,
+    x,
+    y
+) {
+
+    const element =
+        document.createElement("div");
+
+    element.className =
+        "float";
+
+    element.textContent =
+        "+" + formatNumber(amount);
+
+    const rect =
+        clickArea.getBoundingClientRect();
+
+    element.style.left =
+        (x - rect.left) + "px";
+
+    element.style.top =
+        (y - rect.top) + "px";
+
+    clickArea.appendChild(
+        element
+    );
+
+    setTimeout(
+        () => element.remove(),
+        850
+    );
+
+}
+
+
+/* =========================================================
+   LIGAR OS UPGRADES
+========================================================= */
+
+for (const id in upgrades) {
+
+    document
+        .getElementById(id)
+        .addEventListener(
+            "click",
+            () => buyUpgrade(id)
+        );
+
+}
+
+
+/* =========================================================
+   LOOP AUTOMÁTICO
+========================================================= */
+
+let lastTime =
+    performance.now();
+
+function gameLoop(time) {
+
+    const delta =
+        (time - lastTime) / 1000;
+
+    lastTime = time;
+
+    const production =
+        getPPS();
+
+    if (production > 0) {
+
+        game.coins +=
+            production * delta;
+
+        updateUI();
+
+    }
+
+    requestAnimationFrame(
+        gameLoop
+    );
+
+}
+
+requestAnimationFrame(
+    gameLoop
+);
+
+
+/* =========================================================
+   CONQUISTAS
+========================================================= */
+
+function updateAchievements() {
+
+    const achievements = [
+
+        {
+            id: "a1",
+            condition:
+                game.coins >= 1
+        },
+
+        {
+            id: "a2",
+            condition:
+                game.coins >= 1000000
+        },
+
+        {
+            id: "a3",
+            condition:
+                game.coins >= 1000000000
+        },
+
+        {
+            id: "a4",
+            condition:
+                game.coins >= 1000000000000
+        }
+
+    ];
+
+    achievements.forEach(
+        achievement => {
+
+            const element =
+                document.getElementById(
+                    achievement.id
+                );
+
+            if (
+                achievement.condition
+            ) {
+
+                element.classList.add(
+                    "done"
+                );
+
+            } else {
+
+                element.classList.remove(
+                    "done"
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   SAVE
+========================================================= */
+
+function saveGame() {
+
+    try {
+
+        localStorage.setItem(
+            SAVE_KEY,
+            JSON.stringify(game)
+        );
+
+        saveStatus.textContent =
+            "💾 Progresso salvo";
+
+        setTimeout(
+            () => {
+
+                saveStatus.textContent =
+                    "Salvamento automático ativo";
+
+            },
+            1500
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Erro ao salvar:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   LOAD
+========================================================= */
+
+function loadGame() {
+
+    try {
+
+        const saved =
+            localStorage.getItem(
+                SAVE_KEY
+            );
+
+        if (!saved) {
+            return;
+        }
+
+        const data =
+            JSON.parse(saved);
+
+        if (
+            typeof data.coins !== "number"
+        ) {
+
+            return;
+
+        }
+
+        game.coins =
+            Number(data.coins) || 0;
+
+        game.clickPower =
+            Number(data.clickPower) || 1;
+
+        game.clickMultiplier =
+            Number(data.clickMultiplier) || 1;
+
+        game.totalClicks =
+            Number(data.totalClicks) || 0;
+
+
+        if (
+            data.upgrades
+        ) {
+
+            for (const id in upgrades) {
+
+                game.upgrades[id] =
+                    Number(
+                        data.upgrades[id]
+                    ) || 0;
+
+            }
+
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Save inválido:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   SAVE AUTOMÁTICO
+========================================================= */
+
+let saveTimer;
+
+function scheduleSave() {
+
+    clearTimeout(
+        saveTimer
+    );
+
+    saveTimer =
+        setTimeout(
+            saveGame,
+            1000
+        );
+
+}
+
+setInterval(
+    saveGame,
+    5000
+);
+
+
+/* =========================================================
+   BOTÃO SALVAR
+========================================================= */
+
+document
+    .getElementById("save")
+    .addEventListener(
+        "click",
+        saveGame
+    );
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+document
+    .getElementById("reset")
+    .addEventListener(
+        "click",
+        function() {
+
+            const confirmed =
+                confirm(
+                    "Apagar TODO o progresso?"
+                );
+
+            if (!confirmed) {
+                return;
+            }
+
+            localStorage.removeItem(
+                SAVE_KEY
+            );
+
+            game = {
+
+                coins: 0,
+
+                clickPower: 1,
+
+                clickMultiplier: 1,
+
+                totalClicks: 0,
+
+                upgrades: {
+
+                    u1: 0,
+                    u2: 0,
+                    u3: 0,
+                    u4: 0,
+                    u5: 0,
+                    u6: 0,
+                    u7: 0,
+                    u8: 0
+
+                }
+
+            };
+
+            updateUI();
+
+            saveStatus.textContent =
+                "Progresso apagado";
+
+        }
+    );
+
+
+/* =========================================================
+   INICIALIZAÇÃO
+========================================================= */
+
+loadGame();
+
+updateUI();
+
+</script>
+
+</body>
+</html>
+```
