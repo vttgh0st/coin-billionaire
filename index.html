@@ -1688,20 +1688,12 @@ loadGame();
 
 
 /* ===== AUTO CLICK ===== */
+/* O auto clique usa exatamente a mesma força do clique manual */
 setInterval(() => {
-    if (typeof clickCoin === "function") {
-        clickCoin();
-    } else if (typeof handleClick === "function") {
-        handleClick();
-    } else if (typeof addCoins === "function") {
-        addCoins(state.clickPower * state.clickMultiplier);
-    } else {
-        const coin = document.getElementById("coin");
-        if (coin) coin.click();
+    if (typeof addCoins === "function") {
+        addCoins(game.clickPower * game.clickMultiplier);
     }
 }, 1000);
-
-updateUI();
 
 </script>
 
