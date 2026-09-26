@@ -835,6 +835,22 @@ updateUI();
 
 }
 
+/* ===== AUTO CLIQUE ===== */
+let autoClickTimer = null;
+
+function startAutoClick(){
+  if(autoClickTimer) return;
+
+  autoClickTimer = setInterval(function(){
+    if(typeof clickCoin === "function"){
+      clickCoin();
+    }
+  }, 1000);
+}
+
+startAutoClick();
+
+
 $("coin").addEventListener("click",clickCoin);
 
 function showFloat(amount){
