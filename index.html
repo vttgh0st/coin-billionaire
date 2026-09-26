@@ -1686,6 +1686,21 @@ document
 
 loadGame();
 
+
+/* ===== AUTO CLICK ===== */
+setInterval(() => {
+    if (typeof clickCoin === "function") {
+        clickCoin();
+    } else if (typeof handleClick === "function") {
+        handleClick();
+    } else if (typeof addCoins === "function") {
+        addCoins(state.clickPower * state.clickMultiplier);
+    } else {
+        const coin = document.getElementById("coin");
+        if (coin) coin.click();
+    }
+}, 1000);
+
 updateUI();
 
 </script>
